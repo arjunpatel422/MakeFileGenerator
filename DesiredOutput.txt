@@ -1,0 +1,34 @@
+# CS 111 Lab 1 Makefile
+
+CC = gcc
+CFLAGS = -g -Wall -Wextra
+
+all: timetrash
+
+TESTS = $(wildcard test*.sh)
+TEST_BASES = $(subst .sh,,$(TESTS))
+
+TIMETRASH_SOURCES = \
+alloc.c \
+word_stream.c \
+command_stream.c \
+Stack.c \
+execute-command.c \
+read-command.c \
+print-command.c \
+main.c
+
+TIMETRASH_OBJECTS = $(subst .c,.o,$(TIMETRASH_SOURCES))
+
+timetrash: $(TIMETRASH_OBJECTS)
+$(CC) $(CFLAGS) -o $@ $(TIMETRASH_OBJECTS)
+
+alloc.o: alloc.h
+word_stream.o: word_stream.h
+command_stream.o Stack.o execute-command.o main.o print-command.o read-command.o : command.h
+command_stream.o Stack.o execute-command.o print-command.o read-command.o: command-internals.h
+command_stream.o: command_stream.h
+Stack.o: Stack.h
+
+clean:
+rm -fr *.o *~ *.bak *.tar.gz core *.core *.tmp timetrash $(DISTDIR)

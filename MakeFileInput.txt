@@ -1,0 +1,26 @@
+<Language>
+C
+</Language>
+<Compiler>
+gcc
+</Compiler>
+<Header>
+FileReader.h
+</Dependency>
+<Header>
+alloc.h
+</Dependency>
+<Source>
+main.c
+</Source>
+<Source>
+alloc.c
+</Source>
+<Flag>
+</Flag>
+<Dependency>
+command_stream.o Stack.o execute-command.o main.o print-command.o read-command.o : command.h
+</Dependency>
+<Executable>
+makeFileGenerator
+</Executable>
